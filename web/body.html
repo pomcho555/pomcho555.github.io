@@ -1,0 +1,276 @@
+<a class="skip-link" href="#main">Skip to content</a>
+
+<canvas class="ocean" id="ocean" aria-hidden="true"></canvas>
+
+<header class="site-head">
+  <div class="site-head-inner">
+    <a class="brand" href="#top" aria-label="Depth Log — back to top">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
+        <circle cx="3" cy="9" r="1.6"/>
+        <circle cx="9" cy="9" r="1.6"/>
+        <circle cx="15" cy="9" r="1.6"/>
+        <circle cx="6" cy="4.5" r="1.1" opacity="0.55"/>
+        <circle cx="12" cy="13.5" r="1.1" opacity="0.55"/>
+      </svg>
+      depth.log
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#signals">Signals</a>
+      <!--THEME_TOGGLE-->
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <p class="eyebrow">Site reliability · AI/ML infrastructure</p>
+    <h1>Reliability, at&nbsp;<em>depth</em>.</h1>
+    <p class="lede">
+      Site reliability engineer for AI/ML platforms — building and operating
+      GPU fleets, distributed training pipelines, and large-scale data
+      infrastructure for organizations from research institutes to global
+      trading platforms.
+    </p>
+    <p class="live-note">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span id="live-note-text">live — the pod behind this page is a Rust
+      particle simulation compiled to wasm32, ~1,900 dots ticking in linear
+      memory.</span>
+    </p>
+    <div class="hero-cta">
+      <a class="cta-btn" href="#experience">Read the dive record ↓</a>
+      <div class="hero-social" role="group" aria-label="Profiles">
+        <a href="https://github.com/pomcho555" rel="noopener" aria-label="GitHub — pomcho555" title="GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        </a>
+        <a href="https://www.kaggle.com/pompom555" rel="noopener" aria-label="Kaggle — pompom555" title="Kaggle">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.071.358"/></svg>
+        </a>
+        <a href="https://x.com/k8s_pomcho" rel="noopener" aria-label="X — k8s_pomcho" title="X">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!--CONSOLE-->
+
+  <section class="section reveal" id="about" aria-labelledby="about-h">
+    <div class="section-head">
+      <p class="eyebrow">§ About</p>
+      <h2 id="about-h">SRE practice, ML background</h2>
+    </div>
+    <p>
+      I work where production infrastructure meets machine learning:
+      Kubernetes, Terraform, observability, and networking on one side; a
+      graduate research background and hands-on MLOps on the other. That
+      combination is what it takes to run GPU platforms and training
+      pipelines that researchers can rely on — and to retire the toil that
+      keeps them from scaling.
+    </p>
+    <ul class="facts" aria-label="Quick facts">
+      <li>CKA certified</li>
+      <li>Kaggle Competitions Expert</li>
+      <li>OSS: Ray · DeepEval · Loki Helm chart</li>
+      <li>K8s / Terraform / GPU infra</li>
+    </ul>
+  </section>
+
+  <section class="section reveal" id="experience" aria-labelledby="experience-h">
+    <div class="section-head">
+      <p class="eyebrow">§ Dive record</p>
+      <h2 id="experience-h">Experience, by descent</h2>
+      <p class="muted">Most recent at the surface — each stop one dive deeper into the stack.</p>
+    </div>
+    <ol class="dive-record">
+      <li>
+        <p class="depth-tag"><span class="depth">▾ 0 m</span> <time datetime="2024-04">Apr 2024</time> — present</p>
+        <div class="role-head">
+          <h3>Site Reliability Engineer III <span class="org">· F5</span></h3>
+        </div>
+        <ul>
+          <li>Shipped an AppStack feature that installs NVIDIA drivers and CUDA for modern GPUs across managed Kubernetes clusters.</li>
+          <li>Enabled deployment on KVM-class environments with L4 GPU passthrough via AppStack VMs.</li>
+          <li>Took over a stalled Loki logging-platform migration and led it to completion — on-premise to EKS with an S3 backend, eliminating hardware-capacity toil and enabling on-demand scale-out.</li>
+          <li>Retired the in-house templating system behind the Loki deployment in favor of the official Helm chart, aligning operations with community standards.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="depth-tag"><span class="depth">▾ 150 m</span> <time datetime="2024">2024</time></p>
+        <div class="role-head">
+          <h3>MLOps Engineer <span class="org">· <a href="https://cluster.mu/en" rel="noopener">Cluster</a> (freelance)</span></h3>
+        </div>
+        <ul>
+          <li>Tuned training-data load performance on an HPC system for ML using striping — accelerating training by ~30%.</li>
+          <li>Built a distributed training pipeline with Ray and Weights &amp; Biases on AWS.</li>
+          <li>Drove an LLM chatbot project — evaluating models, methods, and vector DBs — then handed the system to SWEs.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="depth-tag"><span class="depth">▾ 300 m</span> <time datetime="2022-08">Aug 2022</time> — <time datetime="2024-04">Apr 2024</time></p>
+        <div class="role-head">
+          <h3>DevOps Engineer <span class="org">· Binance</span></h3>
+        </div>
+        <ul>
+          <li>Led development of a GitOps CI/CD pipeline for Terraform from scratch, integrating Atlantis and Policy-as-Code with OPA.</li>
+          <li>Directed a VPN migration across multiple AWS accounts using Transit Gateway, VPC endpoints, and Client VPN.</li>
+          <li>Revived legacy petabyte-scale Hive data pipelines — automated, visualized, and documented them with backfill and retry in a semi-idempotent design.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="depth-tag"><span class="depth">▾ 450 m</span> <time datetime="2021-07">Jul 2021</time> — <time datetime="2022-07">Jul 2022</time></p>
+        <div class="role-head">
+          <h3>Co-Founder / Tech Lead <span class="org">· MaskTap</span></h3>
+          <a class="mono" href="https://www.youtube.com/watch?v=vvvIVb-TGU8" rel="noopener">demo video ↗</a>
+        </div>
+        <ul>
+          <li>Designed and built an auto-anonymization product from scratch around an extensible API.</li>
+          <li>Developed a framework that automatically masks PII in compliance with GDPR and APPI — original enough to be considered for a patent application.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="depth-tag"><span class="depth">▾ 600 m</span> <time datetime="2020-11">Nov 2020</time> — <time datetime="2021-07">Jul 2021</time></p>
+        <div class="role-head">
+          <h3>Machine Learning Engineer <span class="org">· Research Center for Advanced Science and Technology, The University of Tokyo (freelance)</span></h3>
+          <a class="mono" href="https://arxiv.org/abs/2106.15361" rel="noopener">arXiv paper ↗</a>
+        </div>
+        <ul>
+          <li>Created a computer-vision segmentation model end to end, starting from planning what data to collect and how much.</li>
+          <li>Diagnosed an unbalanced, undersized dataset in the first PoC and delivered a model that generalizes — the project resulted in an <a href="https://arxiv.org/abs/2106.15361" rel="noopener">arXiv publication</a>.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="depth-tag"><span class="depth">▾ 750 m</span> <time datetime="2020-04">Apr 2020</time> — <time datetime="2022-08">Aug 2022</time></p>
+        <div class="role-head">
+          <h3>Site Reliability Engineer <span class="org">· SoftBank</span></h3>
+        </div>
+        <ul>
+          <li>Built and operated a production Kubernetes ML-inference platform, with scheduled autoscaling that absorbed traffic surges during large events.</li>
+          <li>Designed end-user APIs on the AI platform using Kubernetes CRDs while preserving compatibility for existing users.</li>
+          <li>Shipped a serverless Vue web app designed for easy maintenance and scale.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="depth-tag"><span class="depth">▾ 900 m</span> <time datetime="2017-07">Jul 2017</time> — <time datetime="2022">2022</time></p>
+        <div class="role-head">
+          <h3>ML Engineer / Tech Lead <span class="org">· BEENOS (part-time → freelance)</span></h3>
+        </div>
+        <ul>
+          <li>Led a team of five as tech lead: Python, Node, AWS, Terraform, GitHub Actions, Kubernetes.</li>
+          <li>Built an ML system for importance discrimination end to end — data collection through deployment.</li>
+          <li>Replaced a legacy monolith crawler with a Pub/Sub architecture for reliability.</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section reveal" id="skills" aria-labelledby="skills-h">
+    <div class="section-head">
+      <p class="eyebrow">§ Instruments</p>
+      <h2 id="skills-h">Working range</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-group">
+        <h3>SRE</h3>
+        <ul>
+          <li>Kubernetes</li><li>CI/CD</li><li>AWS</li><li>Google Cloud</li><li>Terraform</li><li>Linux</li><li>Networking</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <ul>
+          <li>Python</li><li>Go</li><li>Rust</li><li>Java</li><li>FastAPI</li><li>Django</li><li>Laravel</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Machine learning</h3>
+        <ul>
+          <li>PyTorch</li><li>Deep learning</li><li>NLP</li><li>MLOps</li><li>Prompt engineering</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Observability</h3>
+        <ul>
+          <li>Loki</li><li>Prometheus</li><li>Grafana</li><li>Vector</li><li>Fluent Bit</li><li>Elasticsearch</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Data</h3>
+        <ul>
+          <li>Hive</li><li>Spark</li><li>Kafka</li><li>ClickHouse</li><li>BigQuery</li><li>Dagster</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="signals" aria-labelledby="signals-h">
+    <div class="section-head">
+      <p class="eyebrow">§ Signals</p>
+      <h2 id="signals-h">Beyond the day job</h2>
+    </div>
+    <div class="signals">
+      <div class="signal">
+        <h3>Open source</h3>
+        <ul>
+          <li>
+            <span class="what">Contributor to Ray, DeepEval, the Loki Helm chart (Grafana community), and official AWS repositories</span>
+            <span class="where">upstream fixes and features grown out of production SRE and MLOps work</span>
+          </li>
+        </ul>
+      </div>
+      <div class="signal">
+        <h3>Awards</h3>
+        <ul>
+          <li>
+            <span class="what">Top 3 — <a href="https://www.iwsec.org/pws/2021/cup21_e.html" rel="noopener">PWS Cup 2021</a>, privacy-protection technology competition</span>
+            <span class="where">Computer Security Symposium · 2021</span>
+          </li>
+        </ul>
+      </div>
+      <div class="signal">
+        <h3>Certifications</h3>
+        <ul>
+          <li>
+            <span class="what">CKA — Certified Kubernetes Administrator</span>
+            <span class="where">The Linux Foundation · 2024</span>
+          </li>
+          <li>
+            <span class="what">Kaggle Competitions Expert</span>
+            <span class="where">Kaggle · 2024</span>
+          </li>
+          <li>
+            <span class="what">AWS Certified SysOps Administrator — Associate</span>
+            <span class="where">AWS · 2021</span>
+          </li>
+          <li>
+            <span class="what">On-The-Ground Special Radio Operator</span>
+            <span class="where">The Government of Japan · 2018</span>
+          </li>
+          <li>
+            <span class="what">JSBA Badge Test Level 1</span>
+            <span class="where">Japan Snowboarding Association · 2026</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <p class="eyebrow">§ Surface</p>
+    <p class="colophon">
+      Built by hand: Rust → wasm32-unknown-unknown via
+      <a href="https://github.com/wasm-bindgen/wasm-bindgen" rel="noopener">wasm-bindgen</a>.
+      No frameworks, no trackers — ~1,900 dots ticking in linear memory.
+    </p>
+  </div>
+</footer>
+
+<div class="depth-rail" aria-hidden="true">
+  <span>0&nbsp;m</span>
+  <div class="track"><span class="marker" id="depth-marker"></span></div>
+  <span id="depth-readout">−0 m</span>
+</div>
