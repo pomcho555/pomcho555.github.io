@@ -112,6 +112,7 @@ ${script}
 </script>
 `;
 
+mkdirSync(join(root, 'dist'), { recursive: true });
 writeFileSync(join(root, 'dist', 'index.html'), standalone);
 writeFileSync(join(root, 'dist', 'artifact.html'), artifact);
 
