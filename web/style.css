@@ -1,0 +1,862 @@
+/* Depth Log — dark-first ocean theme.
+   Token contract: bare :root carries the complete dark palette (the page's
+   native world). Light is the "surface" theme, applied via media query for
+   un-stamped documents and via [data-theme] for explicit choices. */
+
+:root {
+  --bg: #071019;
+  --bg-elev: #0d1a27;
+  --ink: #e9f2f4;
+  --ink-2: #8ba4b4;
+  --line: #1b2f3f;
+  --accent: #5ce4d0;
+  --accent-dim: #2c8579;
+  --danger: #ff9d80;
+  --glow: rgba(92, 228, 208, 0.05);
+
+  --dot-body: #3d5d74;
+  --dot-saddle: #7f9db0;
+  --dot-patch: #e9f2f4;
+  --dot-speck: #568493;
+
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Helvetica Neue", sans-serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --measure: 62ch;
+  --pad: clamp(1.25rem, 5vw, 2.5rem);
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #eef4f6;
+    --bg-elev: #f9fcfc;
+    --ink: #132835;
+    --ink-2: #4d6b7b;
+    --line: #cddee3;
+    --accent: #097367;
+    --accent-dim: #58a096;
+    --danger: #b3402a;
+    --glow: rgba(9, 115, 103, 0.05);
+
+    --dot-body: #2c4a5c;
+    --dot-saddle: #7593a3;
+    --dot-patch: #b7d3da;
+    --dot-speck: #8fb2bd;
+
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg: #eef4f6;
+  --bg-elev: #f9fcfc;
+  --ink: #132835;
+  --ink-2: #4d6b7b;
+  --line: #cddee3;
+  --accent: #097367;
+  --accent-dim: #58a096;
+  --danger: #b3402a;
+  --glow: rgba(9, 115, 103, 0.05);
+
+  --dot-body: #2c4a5c;
+  --dot-saddle: #7593a3;
+  --dot-patch: #b7d3da;
+  --dot-speck: #8fb2bd;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0325rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Faint light falling from the surface. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 55% at 50% -10%, var(--glow), transparent 70%),
+    linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+}
+
+.ocean {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+a {
+  color: var(--ink);
+  text-decoration-color: var(--accent-dim);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--pad);
+  z-index: 20;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* --- Type roles -------------------------------------------------------- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 640;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.muted {
+  color: var(--ink-2);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+/* --- Header ------------------------------------------------------------ */
+
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--line);
+  /* Kept mostly opaque with a small blur: the fixed canvas underneath
+     repaints every frame, so the backdrop kernel must stay cheap. */
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.site-head-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding: 0.8rem var(--pad);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--ink);
+}
+
+.brand svg {
+  display: block;
+  color: var(--accent);
+}
+
+.site-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.site-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .site-nav a:not(:last-of-type) {
+    display: none;
+  }
+}
+
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.theme-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+/* Inert without JS; the script reveals it. */
+.theme-btn[hidden] {
+  display: none;
+}
+
+/* Icon follows the *effective* theme: moon by default (dark-first),
+   sun whenever the light palette is in effect — stamped or system. */
+.theme-btn .icon-sun,
+:root[data-theme="light"] .theme-btn .icon-moon {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-btn .icon-sun {
+  display: block;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-btn .icon-moon {
+    display: none;
+  }
+
+  :root:not([data-theme="dark"]) .theme-btn .icon-sun {
+    display: block;
+  }
+}
+
+:root[data-theme="dark"] .theme-btn .icon-moon {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-btn .icon-sun {
+  display: none;
+}
+
+/* --- Layout ------------------------------------------------------------ */
+
+main {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vh, 6rem);
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2.6rem;
+}
+
+.section p,
+.section li {
+  max-width: var(--measure);
+}
+
+/* --- Hero -------------------------------------------------------------- */
+
+.hero {
+  min-height: calc(100svh - 3.7rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding-block: 4rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.7rem, 8.5vw, 5.6rem);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+  max-width: 11ch;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero .lede {
+  max-width: 52ch;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: var(--ink-2);
+}
+
+.live-note {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--ink-2);
+  letter-spacing: 0.03em;
+}
+
+.live-dot {
+  flex: none;
+  align-self: center;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.hero-cta {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.4rem;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid var(--accent-dim);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.cta-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero-social {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.hero-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink-2);
+}
+
+.hero-social a:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+.hero-social svg {
+  display: block;
+}
+
+/* --- Facts row --------------------------------------------------------- */
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin-top: 2rem;
+  list-style: none;
+}
+
+.facts li {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  background: color-mix(in srgb, var(--bg-elev) 55%, transparent);
+}
+
+/* --- Dive record (experience) ------------------------------------------ */
+
+.dive-record {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  border-left: 1px solid var(--line);
+}
+
+.dive-record > li {
+  position: relative;
+  padding-left: clamp(1.4rem, 4vw, 2.4rem);
+}
+
+.dive-record > li::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0.42em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+}
+
+.dive-record > li:first-child::before {
+  background: var(--accent);
+}
+
+.depth-tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 0.55rem;
+}
+
+.depth-tag .depth {
+  color: var(--accent);
+}
+
+.role-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.role-head .org {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.dive-record ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  color: var(--ink-2);
+}
+
+.dive-record ul li {
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.dive-record ul li::before {
+  content: "·";
+  position: absolute;
+  left: 0.15rem;
+  color: var(--accent-dim);
+}
+
+/* --- Skills ------------------------------------------------------------ */
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem 2.5rem;
+}
+
+.skill-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.skill-group h3 {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.skill-group ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.skill-group li {
+  padding: 0.28rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 0.84rem;
+  background: color-mix(in srgb, var(--bg-elev) 55%, transparent);
+}
+
+/* --- Signals (OSS, publications, awards) ------------------------------- */
+
+.signals {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.signal {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+  gap: 1rem 2rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+  .signal {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}
+
+.signal > h3 {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.signal ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.signal .what {
+  display: block;
+}
+
+.signal .where {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink-2);
+  margin-top: 0.15rem;
+}
+
+/* --- Footer ------------------------------------------------------------ */
+
+.site-foot {
+  border-top: 1px solid var(--line);
+  padding: 3.5rem var(--pad) 4.5rem;
+}
+
+.site-foot-inner {
+  max-width: 1080px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.site-foot p {
+  max-width: var(--measure);
+  color: var(--ink-2);
+  font-size: 0.92rem;
+}
+
+.colophon {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+}
+
+/* --- Sonar console (DuckDB build only) ---------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.console-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.console-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.console-chips button {
+  padding: 0.32rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--bg-elev) 55%, transparent);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.console-chips button:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+#console-sql {
+  width: 100%;
+  max-width: 760px;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--bg-elev) 75%, transparent);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+#console-sql:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.console-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+#console-run {
+  padding: 0.55rem 1.2rem;
+  border: 1px solid var(--accent-dim);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+#console-run:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+#console-run:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#console-status {
+  font-size: 0.74rem;
+  color: var(--ink-2);
+}
+
+#console-status.is-error {
+  color: var(--danger);
+}
+
+.console-result {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.console-result table {
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.console-result th,
+.console-result td {
+  padding: 0.45rem 0.9rem 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  max-width: 42ch;
+}
+
+.console-result th {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* --- Depth rail -------------------------------------------------------- */
+
+.depth-rail {
+  position: fixed;
+  top: 50%;
+  right: 1.1rem;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+  opacity: 0.85;
+}
+
+.depth-rail .track {
+  position: relative;
+  width: 1px;
+  height: 34vh;
+  background: var(--line);
+}
+
+.depth-rail .marker {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+@media (max-width: 960px) {
+  .depth-rail {
+    display: none;
+  }
+}
+
+/* --- Reveal on scroll ---------------------------------------------------
+   Visible by default; the script opts in via html.js-anim only when
+   IntersectionObserver exists and the viewer allows motion. */
+
+html.js-anim .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+html.js-anim .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .live-dot {
+    animation: none;
+  }
+
+  /* Covers reduced-motion turning on mid-session, after js-anim was added. */
+  html.js-anim .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,27 @@
+<section class="section" id="console" aria-labelledby="console-h" hidden>
+  <div class="section-head">
+    <p class="eyebrow">§ Sonar</p>
+    <h2 id="console-h">Query this CV</h2>
+    <p class="muted">
+      This page's data lives in a DuckDB database running in your browser via
+      WebAssembly. Run SQL against it — an <code>UPDATE</code> re-renders the
+      dive record below<span id="persist-note"></span>.
+    </p>
+  </div>
+  <div class="console-panel">
+    <div class="console-chips" role="group" aria-label="Example queries">
+      <button type="button" data-sql="SELECT depth_m, role, org, start_label AS from_, coalesce(end_label, 'present') AS to_ FROM experience ORDER BY depth_m;">list dives</button>
+      <button type="button" data-sql="SELECT area, string_agg(item, ' · ' ORDER BY ord) AS stack FROM skills GROUP BY area;">stack by area</button>
+      <button type="button" data-sql="UPDATE experience SET role = replace(role, 'III', 'IV') WHERE org = 'F5'; SELECT role, org FROM experience WHERE org = 'F5';">promote me</button>
+      <button type="button" data-sql="SELECT category, what, note FROM signals;">signals</button>
+      <button type="button" id="console-reset">reset data</button>
+    </div>
+    <label class="visually-hidden" for="console-sql">SQL statement</label>
+    <textarea id="console-sql" rows="3" spellcheck="false" autocomplete="off">SELECT depth_m, role, org FROM experience ORDER BY depth_m;</textarea>
+    <div class="console-actions">
+      <button type="button" id="console-run">Run</button>
+      <span class="mono" id="console-status" role="status" aria-live="polite">starting DuckDB…</span>
+    </div>
+    <div class="console-result" id="console-result" tabindex="0" aria-label="Query results"></div>
+  </div>
+</section>

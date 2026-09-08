@@ -1,0 +1,19 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Single-file portfolio page for the CV in `../resume.md`, with all identifying details removed (name, contacts, account handles, university names, publications). The background is a pod of orcas rendered as square dots — a particle simulation written in Rust, compiled to `wasm32-unknown-unknown` with [wasm-bindgen](https://github.com/wasm-bindgen/wasm-bindgen), and embedded into the page as base64 (works from `file://`, no server needed).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@duckdb/duckdb-wasm": "^1.33.1-dev57.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}
